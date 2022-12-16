@@ -1,6 +1,7 @@
-const Table = () => {
+const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
   return (
     <div>
+      {console.log(markets, page)}
       <div className="mx-10 mt-10 overflow-y-auto">
         <div className="mb-6 p-4 border rounded-2xl shadow w-fit">
           <div className="flex items-baseline">
@@ -34,11 +35,20 @@ const Table = () => {
         </div>
       </div>
       <div className="mt-2 flex justify-center text-sm">
-        <button className="border-solid bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2">
+        <button
+          className="border-solid bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          onClick={onPreviousPage}
+          disabled={page < 2 && true}
+        >
           Previous
         </button>
-        <div className="p-2">1</div>
-        <button className="border-solid bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2">Next</button>
+        <div className="p-2">{page}</div>
+        <button
+          className="border-solid bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          onClick={onNextPage}
+        >
+          Next
+        </button>
       </div>
     </div>
   )
