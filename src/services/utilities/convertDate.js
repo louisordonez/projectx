@@ -1,5 +1,2 @@
-export const convertDate = (timestamp) => {
-  const date = new Date(timestamp)
-
-  return `${date.toLocaleDateString('en-US')} ${date.toLocaleTimeString('en-US')}`
-}
+export const convertDate = (timestamp) =>
+  timestamp && `${new Date(timestamp).toLocaleDateString('en-US')} ${new Date(timestamp).toLocaleTimeString('en-US')}`
