@@ -30,11 +30,11 @@ const Navbar = ({ onSearch }) => {
         />
         <button
           type="button"
-          className="border-none hover:text-white focus:outline-none font-medium rounded-full text-sm p-2 text-center inline-flex items-center"
+          className="border-none text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 focus:ring-4 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center"
           onClick={() => onSearch(value)}
         >
           <svg
-            className="w-5 h-5 text-gray-500 dark:text-gray-400"
+            className="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

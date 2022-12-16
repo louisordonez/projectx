@@ -1,7 +1,33 @@
+import { useState } from 'react'
+import Modal from './Modal'
 import { convertDate } from '../services/utilities/convertDate'
 import { convertCurrency } from '../services/utilities/convertCurrency'
 
 const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
+  const [open, setOpen] = useState(false)
+
+  const handleRoi = (roi) => {
+    if (roi !== null) {
+      return (
+        <>
+          <button
+            className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2.5 py-[0.3125rem]"
+            onClick={() => setOpen(true)}
+          >
+            View
+          </button>
+          <Modal open={open} onClose={() => setOpen(false)} title={'Roi'}>
+            <p className="mt-2">Times: {roi.times}</p>
+            <p className="mt-2">
+              Currency: <span className="uppercase">{roi.currency}</span>
+            </p>
+            <p className="mt-2">Percentage: {Math.round(roi.percentage * 10) / 10}</p>
+          </Modal>
+        </>
+      )
+    }
+  }
+
   const handleChange = (value) => {
     const roundedValue = Math.round(value * 10) / 10
 
@@ -54,7 +80,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
                 <th className="py-4 px-6 font-semibold">Atl</th>
                 <th className="py-4 px-6 font-semibold">Atl Change Percentage</th>
                 <th className="py-4 px-6 font-semibold">Atl Date</th>
-                {/* <th className="py-4 px-6 font-semibold">Roi</th> */}
+                <th className="py-4 px-6 font-semibold">Roi</th>
                 <th className="py-4 px-6 font-semibold">Last Updated</th>
               </tr>
             </thead>
@@ -111,7 +137,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
                       market.atl_change_percentage
                     )}%`}</td>
                     <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
-                    {/* <td className="py-4 px-6">{market.roi}</td> */}
+                    <td className="py-4 px-6">{handleRoi(market.roi)}</td>
                     <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
                   </tr>
                 )
@@ -122,7 +148,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
       </div>
       <div className="mt-2 flex justify-center text-sm">
         <button
-          className="border-solid w-8 bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="border-solid w-8 focus:outline-none bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
           onClick={onPreviousPage}
           disabled={page < 2 && true}
         >
@@ -130,7 +156,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
         </button>
         <div className="p-2">{page}</div>
         <button
-          className="border-solid w-8 bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="border-solid w-8 focus:outline-none bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
           onClick={onNextPage}
           disabled={page >= totalPages / 10 && true}
         >
