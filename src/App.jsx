@@ -33,7 +33,7 @@ const App = () => {
           <Table markets={markets} page={page} onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} />
         </div>
       )}
-      {error && 'Error'}
+      {error && alert('Rate limit exceeded. Please wait a few moments and try again')}
     </div>
   )
 }

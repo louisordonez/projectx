@@ -10,9 +10,17 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
 
   const handleColor = (value) => (value > 0 ? 'text-green-700' : 'text-red-700')
 
-  const handleChange = (value) => (value > 0 ? `▲ ${value}` : `▼ ${value}`)
+  const handleChange = (value) => {
+    const roundedValue = Math.round(value * 10) / 10
 
-  const handlePriceChange = (value) => (value > 0 ? `▲ $${value}` : value.toString().replace('-', '▼ -$'))
+    return value > 0 ? `▲ ${roundedValue}` : `▼ ${roundedValue}`
+  }
+
+  const handleAmountChange = (value) => {
+    const roundedValue = Math.round(value * 10) / 10
+
+    return value > 0 ? `▲ $${value.toLocaleString('en-US')}` : value.toLocaleString('en-US').replace('-', '▼ -$')
+  }
 
   const handleSupply = (value) => value && value.toLocaleString('en-US')
 
@@ -69,13 +77,13 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
                     <td className="py-4 px-6">{convertCurrency(market.high_24h)}</td>
                     <td className="py-4 px-6">{convertCurrency(market.low_24h)}</td>
                     <td className={`py-4 px-6 ${handleColor(market.price_change_24h)}`}>
-                      {handlePriceChange(market.price_change_24h)}
+                      {handleAmountChange(market.price_change_24h)}
                     </td>
                     <td className={`py-4 px-6 ${handleColor(market.price_change_percentage_24h)}`}>{`${handleChange(
                       market.price_change_percentage_24h
                     )}%`}</td>
                     <td className={`py-4 px-6 ${handleColor(market.market_cap_change_24h)}`}>
-                      {convertCurrency(market.market_cap_change_24h)}
+                      {handleAmountChange(market.market_cap_change_24h)}
                     </td>
                     <td
                       className={`py-4 px-6 ${handleColor(market.market_cap_change_percentage_24h)}`}
