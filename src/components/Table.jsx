@@ -1,15 +1,7 @@
 import { convertDate } from '../services/utilities/convertDate'
 import { convertCurrency } from '../services/utilities/convertCurrency'
 
-const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
-  const handleBorder = (index) => {
-    if (markets.length > 1) {
-      return index < 9 && 'border-b'
-    }
-  }
-
-  const handleColor = (value) => (value > 0 ? 'text-green-700' : 'text-red-700')
-
+const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
   const handleChange = (value) => {
     const roundedValue = Math.round(value * 10) / 10
 
@@ -19,11 +11,20 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
   const handleAmountChange = (value) => {
     const roundedValue = Math.round(value * 10) / 10
 
-    return value > 0 ? `▲ $${value.toLocaleString('en-US')}` : value.toLocaleString('en-US').replace('-', '▼ -$')
+    return value > 0
+      ? `▲ $${roundedValue.toLocaleString('en-US')}`
+      : roundedValue.toLocaleString('en-US').replace('-', '▼ -$')
   }
 
   const handleSupply = (value) => value && value.toLocaleString('en-US')
 
+  const handleColor = (value) => (value > 0 ? 'text-green-700' : 'text-red-700')
+
+  const handleBorder = (index) => {
+    if (markets.length > 1) {
+      return index < 9 && 'border-b'
+    }
+  }
   return (
     <div>
       <div className="flex justify-center">
@@ -131,6 +132,7 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
         <button
           className="border-solid w-8 bg-green-700 hover:bg-green-900 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
           onClick={onNextPage}
+          disabled={page >= totalPages / 10 && true}
         >
           {'>'}
         </button>

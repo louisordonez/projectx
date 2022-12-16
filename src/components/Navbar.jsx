@@ -52,7 +52,7 @@ const Navbar = ({ onSearch }) => {
       <div className="mx-6">
         <a
           className={`font-semibold cursor-pointer ${handleActive()} active:text-green-900 hover:text-green-900`}
-          href="#"
+          href="/"
         >
           Markets
         </a>

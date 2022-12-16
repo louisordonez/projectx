@@ -8,7 +8,7 @@ const App = () => {
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
 
-  const { markets, loading, error } = useMarkets(search, page)
+  const { markets, totalPages, loading, error } = useMarkets(search, page)
 
   const handleSearch = (value) => {
     setSearch(value)
@@ -30,7 +30,13 @@ const App = () => {
         </div>
       ) : (
         <div className="mt-8 mb-8">
-          <Table markets={markets} page={page} onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} />
+          <Table
+            markets={markets}
+            page={page}
+            totalPages={totalPages}
+            onNextPage={handleNextPage}
+            onPreviousPage={handlePreviousPage}
+          />
         </div>
       )}
       {error && alert('Rate limit exceeded. Please wait a few moments and try again')}
