@@ -11,7 +11,10 @@ const useMarkets = (search, page) => {
   useEffect(() => {
     setLoading(true)
     setError(false)
-    const params = `?vs_currency=usd&order=market_cap_desc&per_page=10&page=${page}&sparkline=false`
+
+    const params = search
+      ? `?vs_currency=usd&ids=${search}&order=market_cap_desc&per_page=10&page=${page}&sparkline=false`
+      : `?vs_currency=usd&order=market_cap_desc&per_page=10&page=${page}&sparkline=false`
     const controller = new AbortController()
 
     CoinGeckoRef.get(`${COINS_MARKETS_ENDPOINT}${params}`, {

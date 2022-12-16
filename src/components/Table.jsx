@@ -37,7 +37,10 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
             <tbody className="">
               {markets.map((market, index) => {
                 return (
-                  <tr className={`whitespace-nowrap hover:bg-gray-50 ${index !== 9 && 'border-b'}`} key={index}>
+                  <tr
+                    className={`whitespace-nowrap hover:bg-gray-50 ${index !== 9 && index.length === 1 && 'border-b'}`}
+                    key={index}
+                  >
                     <td className="py-3 px-6">{market.market_cap_rank}</td>
                     <td className="py-3 px-6">
                       <div className="flex items-center">
