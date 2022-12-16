@@ -1,3 +1,5 @@
+import { convertDate } from '../services/utilities/convertDate'
+
 const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
   const handleBorder = (index) => {
     if (markets.length > 1) {
@@ -67,12 +69,12 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
                     <td className="py-4 px-6">{market.max_supply}</td>
                     <td className="py-4 px-6">{market.ath}</td>
                     <td className="py-4 px-6">{market.ath_change_percentage}</td>
-                    <td className="py-4 px-6">{market.ath_date}</td>
+                    <td className="py-4 px-6">{convertDate(market.ath_date)}</td>
                     <td className="py-4 px-6">{market.atl}</td>
                     <td className="py-4 px-6">{market.atl_change_percentage}</td>
-                    <td className="py-4 px-6">{market.atl_date}</td>
+                    <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
                     {/* <td className="">{market.roi}</td> */}
-                    <td className="py-4 px-6">{market.last_updated}</td>
+                    <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
                   </tr>
                 )
               })}
