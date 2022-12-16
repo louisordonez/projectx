@@ -90,11 +90,11 @@ const Table = ({ markets, page, onNextPage, onPreviousPage }) => {
                     >{`${handleChange(market.market_cap_change_percentage_24h)}%`}</td>
                     <td className="py-4 px-6">
                       <span>{handleSupply(market.circulating_supply)}</span>
-                      <span className="ml-1 uppercase">{market.symbol}</span>
+                      <span className="ml-1 uppercase">{market.circulating_supply && market.symbol}</span>
                     </td>
                     <td className="py-4 px-6">
                       <span>{handleSupply(market.total_supply)}</span>
-                      <span className="ml-1 uppercase">{market.symbol}</span>
+                      <span className="ml-1 uppercase">{market.total_supply && market.symbol}</span>
                     </td>
                     <td className="py-4 px-6">
                       <span>{handleSupply(market.max_supply)}</span>
