@@ -25,8 +25,10 @@ const App = () => {
         <h1 className="text-4xl">Markets</h1>
       </div>
       {loading ? (
-        <div className="mt-8 mb-8">
-          <Spinner />
+        <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 block}`}>
+          <div className="absolute top-2/4 left-2/4">
+            <Spinner />
+          </div>
         </div>
       ) : (
         <div className="mt-8 mb-8">

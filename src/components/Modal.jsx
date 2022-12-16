@@ -1,7 +1,7 @@
 const Modal = ({ open, onClose, title, children }) => {
   return (
-    <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-5 z-0 ${open ? 'block' : 'hidden'}`}>
-      <div className="fixed bg-white w-96 h-[11rem] top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 rounded-lg shadow">
+    <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 ${open ? 'block' : 'hidden'}`}>
+      <div className="fixed w-96 h-[11rem] top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 bg-white rounded-lg shadow">
         <div className="flex justify-between items-baseline m-6 mb-4">
           <h1 className="uppercase font-semibold text-lg absolute top-3 left-2.5 p-2">{title}</h1>
           <button
