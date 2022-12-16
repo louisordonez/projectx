@@ -9,8 +9,8 @@ const App = () => {
 
   const { markets, loading, error } = useMarkets(search, page)
 
-  const handleSearch = (event) => {
-    setSearch(event.target.value)
+  const handleSearch = (value) => {
+    setSearch(value)
   }
 
   const handleNextPage = () => setPage((page) => page + 1)
@@ -19,14 +19,14 @@ const App = () => {
 
   return (
     <div className="App font-poppins">
-      <Navbar search={search} onSearch={handleSearch} />
-      <div className="m-10 text-4xl">
+      <Navbar onSearch={handleSearch} />
+      <div className="mx-10 mt-8 text-4xl">
         <h1>Markets</h1>
       </div>
       {loading ? (
         'Loading...'
       ) : (
-        <div className="mb-10">
+        <div className="mt-8 mb-8">
           <Table markets={markets} page={page} onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} />
         </div>
       )}
