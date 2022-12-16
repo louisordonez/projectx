@@ -21,8 +21,8 @@ const App = () => {
   return (
     <div className="App font-poppins">
       <Navbar onSearch={handleSearch} />
-      <div className="mx-10 mt-8 text-4xl">
-        <h1>Markets</h1>
+      <div className="mx-10 mt-8">
+        <h1 className="text-4xl">Markets</h1>
       </div>
       {loading ? (
         <div className="mt-8 mb-8">
