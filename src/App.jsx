@@ -26,7 +26,9 @@ const App = () => {
       {loading ? (
         'Loading...'
       ) : (
-        <Table markets={markets} page={page} onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} />
+        <div className="mb-10">
+          <Table markets={markets} page={page} onNextPage={handleNextPage} onPreviousPage={handlePreviousPage} />
+        </div>
       )}
       {error && 'Error'}
     </div>
