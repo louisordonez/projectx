@@ -9,7 +9,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
   const handleRoi = (roi) => {
     if (roi !== null) {
       return (
-        <>
+        <div>
           <button
             className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2.5 py-[0.3125rem]"
             onClick={() => setOpen(true)}
@@ -23,7 +23,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
             </p>
             <p className="mt-2">Percentage: {Math.round(roi.percentage * 10) / 10}</p>
           </Modal>
-        </>
+        </div>
       )
     }
   }
@@ -46,11 +46,8 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
 
   const handleColor = (value) => (value > 0 ? 'text-green-700' : 'text-red-700')
 
-  const handleBorder = (index) => {
-    if (markets.length > 1) {
-      return index < 9 && 'border-b'
-    }
-  }
+  const handleBorder = (index) => markets.length > 1 && index < 9 && 'border-b'
+
   return (
     <div>
       <div className="flex justify-center">
@@ -106,15 +103,15 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
                     <td className={`py-4 px-6 ${handleColor(market.price_change_24h)}`}>
                       {handleAmountChange(market.price_change_24h)}
                     </td>
-                    <td className={`py-4 px-6 ${handleColor(market.price_change_percentage_24h)}`}>{`${handleChange(
-                      market.price_change_percentage_24h
-                    )}%`}</td>
+                    <td className={`py-4 px-6 ${handleColor(market.price_change_percentage_24h)}`}>
+                      {`${handleChange(market.price_change_percentage_24h)}%`}
+                    </td>
                     <td className={`py-4 px-6 ${handleColor(market.market_cap_change_24h)}`}>
                       {handleAmountChange(market.market_cap_change_24h)}
                     </td>
-                    <td
-                      className={`py-4 px-6 ${handleColor(market.market_cap_change_percentage_24h)}`}
-                    >{`${handleChange(market.market_cap_change_percentage_24h)}%`}</td>
+                    <td className={`py-4 px-6 ${handleColor(market.market_cap_change_percentage_24h)}`}>
+                      {`${handleChange(market.market_cap_change_percentage_24h)}%`}
+                    </td>
                     <td className="py-4 px-6">
                       <span>{handleSupply(market.circulating_supply)}</span>
                       <span className="ml-1 uppercase">{market.circulating_supply && market.symbol}</span>
@@ -128,14 +125,14 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
                       <span className="ml-1 uppercase">{market.max_supply && market.symbol}</span>
                     </td>
                     <td className="py-4 px-6">{convertCurrency(market.ath)}</td>
-                    <td className={`py-4 px-6 ${handleColor(market.ath_change_percentage)}`}>{`${handleChange(
-                      market.ath_change_percentage
-                    )}%`}</td>
+                    <td className={`py-4 px-6 ${handleColor(market.ath_change_percentage)}`}>
+                      {`${handleChange(market.ath_change_percentage)}%`}
+                    </td>
                     <td className="py-4 px-6">{convertDate(market.ath_date)}</td>
                     <td className="py-4 px-6">{convertCurrency(market.atl)}</td>
-                    <td className={`py-4 px-6 ${handleColor(market.atl_change_percentage)}`}>{`${handleChange(
-                      market.atl_change_percentage
-                    )}%`}</td>
+                    <td className={`py-4 px-6 ${handleColor(market.atl_change_percentage)}`}>
+                      {`${handleChange(market.atl_change_percentage)}%`}
+                    </td>
                     <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
                     <td className="py-4 px-6">{handleRoi(market.roi)}</td>
                     <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
