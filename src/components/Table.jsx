@@ -3,7 +3,7 @@ import Modal from './Modal'
 import { convertDate } from '../services/utilities/convertDate'
 import { convertCurrency } from '../services/utilities/convertCurrency'
 
-const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
+const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage }) => {
   const [open, setOpen] = useState(false)
 
   const handleRoi = (roi) => {
@@ -155,7 +155,7 @@ const Table = ({ markets, page, totalPages, onNextPage, onPreviousPage }) => {
         <button
           className="border-solid w-8 focus:outline-none bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
           onClick={onNextPage}
-          disabled={page >= totalPages / 10 && true}
+          disabled={page >= totalPages / perPage && true}
         >
           {'>'}
         </button>

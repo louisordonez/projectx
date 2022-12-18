@@ -8,7 +8,8 @@ const App = () => {
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
 
-  const { markets, totalPages, loading, error } = useMarkets(search, page)
+  const perPage = 10
+  const { markets, totalPages, loading, error } = useMarkets(search, page, perPage)
 
   const handleSearch = (value) => {
     setSearch(value)
@@ -35,6 +36,7 @@ const App = () => {
           <Table
             markets={markets}
             page={page}
+            perPage={perPage}
             totalPages={totalPages}
             onNextPage={handleNextPage}
             onPreviousPage={handlePreviousPage}

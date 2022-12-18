@@ -8,6 +8,8 @@ const Navbar = ({ onSearch }) => {
     setActive(true)
   }, [])
 
+  const handleSearch = (value) => (value ? onSearch(value) : alert('Search cannot be empty.'))
+
   const handleActive = () => (active ? 'text-green-900 border-b-2 border-b-green-900' : 'text-green-700')
 
   return (
@@ -19,19 +21,19 @@ const Navbar = ({ onSearch }) => {
       </div>
       <div
         className="flex items-center border rounded-lg"
-        onKeyDown={(event) => event.key === 'Enter' && onSearch(value)}
+        onKeyDown={(event) => event.key === 'Enter' && handleSearch(value)}
       >
         <input
           className="mx-2 text-sm p-2 focus:outline-none"
           type="text"
-          placeholder="Search ID"
+          placeholder="Search"
           value={value}
           onChange={(event) => setValue(event.target.value)}
         />
         <button
           type="button"
           className="border-none text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 focus:ring-4 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center"
-          onClick={() => onSearch(value)}
+          onClick={() => handleSearch(value)}
         >
           <svg
             className="w-5 h-5"
