@@ -25,7 +25,7 @@ const Navbar = ({ onSearch }) => {
         onKeyDown={(event) => event.key === 'Enter' && handleSearch(value)}
       >
         <input
-          className="mx-2 text-sm p-2 focus:outline-none"
+          className="mx-2 text-xs p-2 focus:outline-none"
           type="text"
           placeholder="Search"
           value={value}
@@ -33,7 +33,7 @@ const Navbar = ({ onSearch }) => {
         />
         <button
           type="button"
-          className="border-none text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 focus:ring-4 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center"
+          className="border-none text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 focus:ring-4 font-medium rounded-lg text-xs p-2 text-center inline-flex items-center"
           onClick={() => handleSearch(value)}
         >
           <svg

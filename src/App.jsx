@@ -27,11 +27,11 @@ const App = () => {
     <div className="App font-poppins">
       <Navbar onSearch={handleSearch} />
       <div className="mx-10 mt-8">
-        <h1 className="text-4xl">Markets</h1>
+        <h1 className="text-2xl">Markets</h1>
       </div>
       {search && (
         <div className="mx-10 mt-8">
-          <h1 className="text-2xl">Search results for {search}</h1>
+          <h1 className="text-lg">{totalPages} results</h1>
         </div>
       )}
       {loading ? (
@@ -39,7 +39,7 @@ const App = () => {
           <Spinner />
         </div>
       ) : (
-        <div className="mt-8 mb-8">
+        <div className="mt-6 mb-8">
           <Table
             markets={markets}
             page={page}

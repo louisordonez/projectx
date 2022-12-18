@@ -21,7 +21,7 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
     <div>
       <div className="flex justify-center">
         <div className="mb-6 border rounded-lg shadow overflow-x-auto mx-10 relative">
-          <table className="w-full text-sm text-left ">
+          <table className="w-full text-xs text-left ">
             <thead className="text-gray-700 bg-gray-50 uppercase">
               <tr className="text-left whitespace-nowrap">
                 <th className="py-4 px-6 font-semibold">#</th>
@@ -116,7 +116,7 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
           </table>
         </div>
       </div>
-      <div className="mt-2 flex justify-center text-sm">
+      <div className="mt-2 flex justify-center text-xs">
         <button
           className="border-solid w-8 focus:outline-none bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
           onClick={onPreviousPage}
