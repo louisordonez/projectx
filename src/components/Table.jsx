@@ -99,16 +99,14 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                         </span>
                       </td>
                       <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
-                      <td className="py-4 px-6">
-                        {market.roi !== null && (
-                          <>
-                            <span>{convertCurrency(market.roi.times)}</span>
-                            <span className={`ml-1 ${handleColor(market.roi.percentage)}`}>
-                              {convertPercentage(market.roi.percentage)}
-                            </span>
-                          </>
-                        )}
-                      </td>
+                      {market.roi !== null && (
+                        <td className="py-4 px-6">
+                          <span>{convertCurrency(market.roi.times)}</span>
+                          <span className={`ml-1 ${handleColor(market.roi.percentage)}`}>
+                            {convertPercentage(market.roi.percentage)}
+                          </span>
+                        </td>
+                      )}
                       <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
                     </tr>
                   )
