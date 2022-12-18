@@ -29,23 +29,9 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
     }
   }
 
-  const handleChange = (value) => {
-    const roundedValue = convertPercentage(value)
-
-    return value > 0 ? `▲ ${roundedValue}` : `▼ ${roundedValue}`
-  }
-
-  const handleAmountChange = (value) => {
-    const roundedValue = convertPercentage(value)
-
-    return value > 0
-      ? `▲ $${roundedValue.toLocaleString('en-US')}`
-      : roundedValue.toLocaleString('en-US').replace('-', '▼ -$')
-  }
-
   const handleSupply = (value) => value && value.toLocaleString('en-US')
 
-  const handleColor = (value) => (value > 0 ? 'text-green-700' : 'text-red-700')
+  const handleColor = (value) => (value > 0 ? 'text-green-600' : 'text-red-600')
 
   const handleBorder = (index) => markets.length > 1 && index < 9 && 'border-b'
 
@@ -58,25 +44,20 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
               <tr className="text-left whitespace-nowrap">
                 <th className="py-4 px-6 font-semibold">#</th>
                 <th className="py-4 px-6 font-semibold">Name</th>
-                <th className="py-4 px-6 font-semibold">ID</th>
                 <th className="py-4 px-6 font-semibold">Price</th>
-                <th className="py-4 px-6 font-semibold">Market Cap</th>
-                <th className="py-4 px-6 font-semibold">Fully Diluted Valuation</th>
-                <th className="py-4 px-6 font-semibold">Total Volume</th>
+                <th className="py-4 px-6 font-semibold">Price Change 24h</th>
                 <th className="py-4 px-6 font-semibold">High 24h</th>
                 <th className="py-4 px-6 font-semibold">Low 24h</th>
-                <th className="py-4 px-6 font-semibold">Price Change 24h</th>
-                <th className="py-4 px-6 font-semibold">Price Change % 24h</th>
-                <th className="py-4 px-6 font-semibold">Market Cap Change 24h</th>
-                <th className="py-4 px-6 font-semibold">Market Cap Change % 24h</th>
+                <th className="py-4 px-6 font-semibold">Mkt Cap</th>
+                <th className="py-4 px-6 font-semibold">Mkt Cap Change 24h</th>
+                <th className="py-4 px-6 font-semibold">Total Volume</th>
+                <th className="py-4 px-6 font-semibold">FDV</th>
                 <th className="py-4 px-6 font-semibold">Circulating Supply</th>
                 <th className="py-4 px-6 font-semibold">Total Supply</th>
                 <th className="py-4 px-6 font-semibold">Max Supply</th>
                 <th className="py-4 px-6 font-semibold">Ath</th>
-                <th className="py-4 px-6 font-semibold">Ath Change %</th>
                 <th className="py-4 px-6 font-semibold">Ath Date</th>
                 <th className="py-4 px-6 font-semibold">Atl</th>
-                <th className="py-4 px-6 font-semibold">Atl Change %</th>
                 <th className="py-4 px-6 font-semibold">Atl Date</th>
                 <th className="py-4 px-6 font-semibold">Roi</th>
                 <th className="py-4 px-6 font-semibold">Last Updated</th>
@@ -94,25 +75,24 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                         <span className="ml-1 uppercase text-gray-500 text-xs">{market.symbol}</span>
                       </div>
                     </td>
-                    <td className="py-4 px-6">{market.id}</td>
                     <td className="py-4 px-6">{convertCurrency(market.current_price)}</td>
-                    <td className="py-4 px-6">{convertCurrency(market.market_cap)}</td>
-                    <td className="py-4 px-6">{convertCurrency(market.fully_diluted_valuation)}</td>
-                    <td className="py-4 px-6">{convertCurrency(market.total_volume)}</td>
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.price_change_24h)}</span>
+                      <span className={`ml-1 ${handleColor(market.price_change_percentage_24h)}`}>
+                        {`${convertPercentage(market.price_change_percentage_24h)}%`}
+                      </span>
+                    </td>
                     <td className="py-4 px-6">{convertCurrency(market.high_24h)}</td>
                     <td className="py-4 px-6">{convertCurrency(market.low_24h)}</td>
-                    <td className={`py-4 px-6 ${handleColor(market.price_change_24h)}`}>
-                      {handleAmountChange(market.price_change_24h)}
+                    <td className="py-4 px-6">{convertCurrency(market.market_cap)}</td>
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.market_cap_change_24h)}</span>
+                      <span className={`ml-1 ${handleColor(market.market_cap_change_percentage_24h)}`}>
+                        {`${convertPercentage(market.market_cap_change_percentage_24h)}%`}
+                      </span>
                     </td>
-                    <td className={`py-4 px-6 ${handleColor(market.price_change_percentage_24h)}`}>
-                      {`${handleChange(market.price_change_percentage_24h)}%`}
-                    </td>
-                    <td className={`py-4 px-6 ${handleColor(market.market_cap_change_24h)}`}>
-                      {handleAmountChange(market.market_cap_change_24h)}
-                    </td>
-                    <td className={`py-4 px-6 ${handleColor(market.market_cap_change_percentage_24h)}`}>
-                      {`${handleChange(market.market_cap_change_percentage_24h)}%`}
-                    </td>
+                    <td className="py-4 px-6">{convertCurrency(market.total_volume)}</td>
+                    <td className="py-4 px-6">{convertCurrency(market.fully_diluted_valuation)}</td>
                     <td className="py-4 px-6">
                       <span>{handleSupply(market.circulating_supply)}</span>
                       <span className="ml-1 uppercase">{market.circulating_supply && market.symbol}</span>
@@ -125,15 +105,20 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                       <span>{handleSupply(market.max_supply)}</span>
                       <span className="ml-1 uppercase">{market.max_supply && market.symbol}</span>
                     </td>
-                    <td className="py-4 px-6">{convertCurrency(market.ath)}</td>
-                    <td className={`py-4 px-6 ${handleColor(market.ath_change_percentage)}`}>
-                      {`${handleChange(market.ath_change_percentage)}%`}
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.ath)}</span>
+                      <span className={`ml-1 ${handleColor(market.ath_change_percentage)}`}>
+                        {`${convertPercentage(market.ath_change_percentage)}%`}
+                      </span>
                     </td>
                     <td className="py-4 px-6">{convertDate(market.ath_date)}</td>
-                    <td className="py-4 px-6">{convertCurrency(market.atl)}</td>
-                    <td className={`py-4 px-6 ${handleColor(market.atl_change_percentage)}`}>
-                      {`${handleChange(market.atl_change_percentage)}%`}
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.atl)}</span>
+                      <span className={`ml-1 ${handleColor(market.atl_change_percentage)}`}>
+                        {`${convertPercentage(market.atl_change_percentage)}%`}
+                      </span>
                     </td>
+
                     <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
                     <td className="py-4 px-6">{handleRoi(market.roi)}</td>
                     <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
