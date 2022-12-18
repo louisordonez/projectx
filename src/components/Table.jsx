@@ -141,7 +141,7 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
         <button
           className="border-solid w-8 focus:outline-none bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-white mx-4 p-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
           onClick={onNextPage}
-          disabled={page >= totalPages / perPage && true}
+          disabled={page > totalPages / perPage && true}
         >
           {'>'}
         </button>
