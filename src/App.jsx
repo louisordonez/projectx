@@ -29,7 +29,7 @@ const App = () => {
       <div className="mx-10 mt-8">
         <h1 className="text-4xl">Markets</h1>
       </div>
-      {!loading && search && (
+      {search && (
         <div className="mx-10 mt-8">
           <h1 className="text-2xl">Search results for {search}</h1>
         </div>
