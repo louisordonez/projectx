@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { notifyError } from './Toast'
 
 const Navbar = ({ onSearch }) => {
   const [active, setActive] = useState(false)
@@ -8,7 +9,7 @@ const Navbar = ({ onSearch }) => {
     setActive(true)
   }, [])
 
-  const handleSearch = (value) => (value ? onSearch(value) : alert('Search cannot be empty.'))
+  const handleSearch = (value) => (value ? onSearch(value) : notifyError('Search cannot be empty.'))
 
   const handleActive = () => (active ? 'text-green-900 border-b-2 border-b-green-900' : 'text-green-700')
 

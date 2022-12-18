@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { notifyError } from '../../components/Toast'
 import { CoinGeckoRef } from '../utilities/axios'
 import { COINS_MARKETS_ENDPOINT, SEARCH_ENDPOINT } from '../constants/endpoints'
 
@@ -6,13 +7,13 @@ const useMarkets = (search, page, perPage) => {
   const [markets, setMarkets] = useState([])
   const [totalPages, setTotalPages] = useState(0)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     setLoading(true)
-    setError(false)
+    setError(null)
 
-    const params = `?vs_currency=usd&order=market_cap_desc&sparkline=false&per_page=${perPage}`
+    const params = '?vs_currency=usd&order=market_cap_desc&sparkline=false'
 
     if (search) {
       CoinGeckoRef.get(`${SEARCH_ENDPOINT}${search}`)
@@ -20,10 +21,13 @@ const useMarkets = (search, page, perPage) => {
           const ids = response.data.coins.map((coin) => coin.id)
 
           if (ids.length === 0) {
-            alert('No data found.')
+            setMarkets([])
+            setTotalPages(0)
             setLoading(false)
           } else {
-            CoinGeckoRef.get(`${COINS_MARKETS_ENDPOINT}${params}&ids=${ids.toString()}&page=${page}`)
+            CoinGeckoRef.get(
+              `${COINS_MARKETS_ENDPOINT}${params}&ids=${ids.toString()}&per_page=${perPage}&page=${page}`
+            )
               .then((response) => {
                 setMarkets(response.data)
                 setLoading(false)
@@ -33,14 +37,14 @@ const useMarkets = (search, page, perPage) => {
                     setTotalPages(response.data.length)
                     setLoading(false)
                   })
-                  .catch(() => setError(true))
+                  .catch((error) => setError(error))
               })
-              .catch(() => setError(true))
+              .catch((error) => setError(error))
           }
         })
-        .catch(() => setError(true))
+        .catch((error) => setError(error))
     } else {
-      CoinGeckoRef.get(`${COINS_MARKETS_ENDPOINT}${params}&page=${page}`)
+      CoinGeckoRef.get(`${COINS_MARKETS_ENDPOINT}${params}&per_page=${perPage}&page=${page}`)
         .then((response) => {
           setMarkets(response.data)
           setLoading(false)
@@ -50,9 +54,9 @@ const useMarkets = (search, page, perPage) => {
               setTotalPages(response.data.length)
               setLoading(false)
             })
-            .catch(() => setError(true))
+            .catch((error) => setError(error))
         })
-        .catch(() => setError(true))
+        .catch((error) => setError(error))
     }
   }, [search, page])
 
