@@ -29,7 +29,15 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
     }
   }
 
-  const handleSupply = (value) => value && value.toLocaleString('en-US')
+  const handleSupply = (value, symbol) => {
+    if (value) {
+      return (
+        <span className="ml-1 uppercase">
+          {value.toLocaleString('en-US')} {symbol}
+        </span>
+      )
+    }
+  }
 
   const handleColor = (value) => (value > 0 ? 'text-green-600' : 'text-red-600')
 
@@ -79,7 +87,7 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                     <td className="py-4 px-6">
                       <span>{convertCurrency(market.price_change_24h)}</span>
                       <span className={`ml-1 ${handleColor(market.price_change_percentage_24h)}`}>
-                        {`${convertPercentage(market.price_change_percentage_24h)}%`}
+                        {convertPercentage(market.price_change_percentage_24h)}
                       </span>
                     </td>
                     <td className="py-4 px-6">{convertCurrency(market.high_24h)}</td>
@@ -88,37 +96,27 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                     <td className="py-4 px-6">
                       <span>{convertCurrency(market.market_cap_change_24h)}</span>
                       <span className={`ml-1 ${handleColor(market.market_cap_change_percentage_24h)}`}>
-                        {`${convertPercentage(market.market_cap_change_percentage_24h)}%`}
+                        {convertPercentage(market.market_cap_change_percentage_24h)}
                       </span>
                     </td>
                     <td className="py-4 px-6">{convertCurrency(market.total_volume)}</td>
                     <td className="py-4 px-6">{convertCurrency(market.fully_diluted_valuation)}</td>
-                    <td className="py-4 px-6">
-                      <span>{handleSupply(market.circulating_supply)}</span>
-                      <span className="ml-1 uppercase">{market.circulating_supply && market.symbol}</span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span>{handleSupply(market.total_supply)}</span>
-                      <span className="ml-1 uppercase">{market.total_supply && market.symbol}</span>
-                    </td>
-                    <td className="py-4 px-6">
-                      <span>{handleSupply(market.max_supply)}</span>
-                      <span className="ml-1 uppercase">{market.max_supply && market.symbol}</span>
-                    </td>
+                    <td className="py-4 px-6">{handleSupply(market.circulating_supply, market.symbol)}</td>
+                    <td className="py-4 px-6">{handleSupply(market.total_supply, market.symbol)}</td>
+                    <td className="py-4 px-6">{handleSupply(market.max_supply, market.symbol)}</td>
                     <td className="py-4 px-6">
                       <span>{convertCurrency(market.ath)}</span>
                       <span className={`ml-1 ${handleColor(market.ath_change_percentage)}`}>
-                        {`${convertPercentage(market.ath_change_percentage)}%`}
+                        {convertPercentage(market.ath_change_percentage)}
                       </span>
                     </td>
                     <td className="py-4 px-6">{convertDate(market.ath_date)}</td>
                     <td className="py-4 px-6">
                       <span>{convertCurrency(market.atl)}</span>
                       <span className={`ml-1 ${handleColor(market.atl_change_percentage)}`}>
-                        {`${convertPercentage(market.atl_change_percentage)}%`}
+                        {convertPercentage(market.atl_change_percentage)}
                       </span>
                     </td>
-
                     <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
                     <td className="py-4 px-6">{handleRoi(market.roi)}</td>
                     <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
