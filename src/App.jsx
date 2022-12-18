@@ -29,16 +29,14 @@ const App = () => {
       <div className="mx-10 mt-8">
         <h1 className="text-4xl">Markets</h1>
       </div>
-      {search && (
+      {!loading && search && (
         <div className="mx-10 mt-8">
           <h1 className="text-2xl">Search results for {search}</h1>
         </div>
       )}
       {loading ? (
-        <div className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 block}`}>
-          <div className="absolute top-2/4 left-2/4">
-            <Spinner />
-          </div>
+        <div className="absolute top-2/4 left-2/4">
+          <Spinner />
         </div>
       ) : (
         <div className="mt-8 mb-8">
