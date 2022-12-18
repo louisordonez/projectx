@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Modal from './Modal'
 import { convertDate } from '../services/utilities/convertDate'
 import { convertCurrency } from '../services/utilities/convertCurrency'
+import { convertPercentage } from '../services/utilities/convertPercentage'
 
 const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage }) => {
   const [open, setOpen] = useState(false)
@@ -21,7 +22,7 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
             <p className="mt-2">
               Currency: <span className="uppercase">{roi.currency}</span>
             </p>
-            <p className="mt-2">Percentage: {Math.round(roi.percentage * 10) / 10}</p>
+            <p className="mt-2">Percentage: {convertPercentage(roi.percentage)}</p>
           </Modal>
         </div>
       )
@@ -29,13 +30,13 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
   }
 
   const handleChange = (value) => {
-    const roundedValue = Math.round(value * 10) / 10
+    const roundedValue = convertPercentage(value)
 
     return value > 0 ? `▲ ${roundedValue}` : `▼ ${roundedValue}`
   }
 
   const handleAmountChange = (value) => {
-    const roundedValue = Math.round(value * 10) / 10
+    const roundedValue = convertPercentage(value)
 
     return value > 0
       ? `▲ $${roundedValue.toLocaleString('en-US')}`
