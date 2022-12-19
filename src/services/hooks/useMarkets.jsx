@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import { notifyError } from '../../components/Toast'
 import { CoinGeckoRef } from '../utilities/axios'
-import { COINS_MARKETS_ENDPOINT, SEARCH_ENDPOINT } from '../constants/endpoints'
+import { COINS_MARKETS_ENDPOINT, COINS_LIST_ENDPOINT, SEARCH_ENDPOINT } from '../constants/endpoints'
 
 const useMarkets = (search, page, perPage) => {
   const [markets, setMarkets] = useState([])
@@ -16,7 +15,7 @@ const useMarkets = (search, page, perPage) => {
     const params = '?vs_currency=usd&order=market_cap_desc&sparkline=false'
 
     if (search) {
-      CoinGeckoRef.get(`${SEARCH_ENDPOINT}${search}`)
+      CoinGeckoRef.get(`${SEARCH_ENDPOINT}?query=${search}`)
         .then((response) => {
           const ids = response.data.coins.map((coin) => coin.id)
 
@@ -49,7 +48,7 @@ const useMarkets = (search, page, perPage) => {
           setMarkets(response.data)
           setLoading(false)
 
-          CoinGeckoRef.get(`${COINS_MARKETS_ENDPOINT}${params}`)
+          CoinGeckoRef.get(COINS_LIST_ENDPOINT)
             .then((response) => {
               setTotalPages(response.data.length)
               setLoading(false)
