@@ -16,7 +16,7 @@ const useMarkets = (search, page, perPage) => {
 
     const handleError = (error) => {
       error.code === 'ERR_NETWORK'
-        ? setError('Rate limit exceeded. Please wait a few moments and try again')
+        ? setError('Rate limit exceeded. Please wait a few moments and try again.')
         : setError(error.message)
     }
 
