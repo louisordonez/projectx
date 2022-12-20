@@ -31,7 +31,7 @@ const App = () => {
       </div>
       {search && (
         <div className="mx-10 mt-8">
-          <h1 className="text-lg">{totalPages} results</h1>
+          <h1 className="text-lg">{!loading && totalPages} results</h1>
         </div>
       )}
       {loading ? (
