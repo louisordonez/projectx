@@ -4,12 +4,12 @@ import { convertPercentage } from '../services/utilities/convertPercentage'
 
 const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage }) => {
   const handleSupply = (value, symbol) => {
-    return (
-      value && (
-        <span className="ml-1 uppercase">
-          {value.toLocaleString('en-US')} {symbol}
-        </span>
-      )
+    return value ? (
+      <span className="ml-1 uppercase">
+        {value.toLocaleString('en-US')} {symbol}
+      </span>
+    ) : (
+      ''
     )
   }
 
@@ -99,13 +99,15 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                         </span>
                       </td>
                       <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
-                      {market.roi !== null && (
+                      {market.roi !== null ? (
                         <td className="py-4 px-6">
                           <span>{convertCurrency(market.roi.times)}</span>
                           <span className={`ml-1 ${handleColor(market.roi.percentage)}`}>
                             {convertPercentage(market.roi.percentage)}
                           </span>
                         </td>
+                      ) : (
+                        <td className="py-4 px-6"></td>
                       )}
                       <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
                     </tr>
