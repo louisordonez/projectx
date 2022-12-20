@@ -50,7 +50,7 @@ const App = () => {
           />
         </div>
       )}
-      {error && notifyError('Rate limit exceeded. Please wait a few moments and try again')}
+      {error && notifyError(error)}
       <Toast />
     </div>
   )
