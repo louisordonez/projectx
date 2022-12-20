@@ -4,13 +4,15 @@ import { convertPercentage } from '../services/utilities/convertPercentage'
 
 const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage }) => {
   const handleSupply = (value, symbol) => {
-    return value ? (
-      <span className="ml-1 uppercase">
-        {value.toLocaleString('en-US')} {symbol}
-      </span>
-    ) : (
-      ''
-    )
+    if (value) {
+      return (
+        <span className="ml-1 uppercase">
+          {value.toLocaleString('en-US')} {symbol}
+        </span>
+      )
+    } else {
+      return <span className="ml-1 uppercase">{value === null ? '' : `${value} ${symbol}`}</span>
+    }
   }
 
   const handleColor = (value) => (value > 0 ? 'text-green-600' : 'text-red-600')
