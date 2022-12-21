@@ -55,66 +55,64 @@ const Table = ({ markets, page, perPage, totalPages, onNextPage, onPreviousPage 
                   </td>
                 </tr>
               ) : (
-                markets.map((market, index) => {
-                  return (
-                    <tr className={`whitespace-nowrap hover:bg-gray-50 ${handleBorder(index)}`} key={index}>
-                      <td className="py-4 px-6 text-black">{market.market_cap_rank}</td>
-                      <td className="py-4 px-6 text-black">
-                        <div className="flex items-center">
-                          <img className="w-5 mr-2" src={market.image} />
-                          <span>{market.name}</span>
-                          <span className="ml-1 uppercase text-gray-500 text-xs">{market.symbol}</span>
-                        </div>
-                      </td>
-                      <td className="py-4 px-6">{convertCurrency(market.current_price)}</td>
+                markets.map((market, index) => (
+                  <tr className={`whitespace-nowrap hover:bg-gray-50 ${handleBorder(index)}`} key={index}>
+                    <td className="py-4 px-6 text-black">{market.market_cap_rank}</td>
+                    <td className="py-4 px-6 text-black">
+                      <div className="flex items-center">
+                        <img className="w-5 mr-2" src={market.image} />
+                        <span>{market.name}</span>
+                        <span className="ml-1 uppercase text-gray-500 text-xs">{market.symbol}</span>
+                      </div>
+                    </td>
+                    <td className="py-4 px-6">{convertCurrency(market.current_price)}</td>
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.price_change_24h)}</span>
+                      <span className={`ml-1 ${handleColor(market.price_change_percentage_24h)}`}>
+                        {convertPercentage(market.price_change_percentage_24h)}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6">{convertCurrency(market.high_24h)}</td>
+                    <td className="py-4 px-6">{convertCurrency(market.low_24h)}</td>
+                    <td className="py-4 px-6">{convertCurrency(market.market_cap)}</td>
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.market_cap_change_24h)}</span>
+                      <span className={`ml-1 ${handleColor(market.market_cap_change_percentage_24h)}`}>
+                        {convertPercentage(market.market_cap_change_percentage_24h)}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6">{convertCurrency(market.total_volume)}</td>
+                    <td className="py-4 px-6">{convertCurrency(market.fully_diluted_valuation)}</td>
+                    <td className="py-4 px-6">{handleSupply(market.circulating_supply, market.symbol)}</td>
+                    <td className="py-4 px-6">{handleSupply(market.total_supply, market.symbol)}</td>
+                    <td className="py-4 px-6">{handleSupply(market.max_supply, market.symbol)}</td>
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.ath)}</span>
+                      <span className={`ml-1 ${handleColor(market.ath_change_percentage)}`}>
+                        {convertPercentage(market.ath_change_percentage)}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6">{convertDate(market.ath_date)}</td>
+                    <td className="py-4 px-6">
+                      <span>{convertCurrency(market.atl)}</span>
+                      <span className={`ml-1 ${handleColor(market.atl_change_percentage)}`}>
+                        {convertPercentage(market.atl_change_percentage)}
+                      </span>
+                    </td>
+                    <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
+                    {market.roi !== null ? (
                       <td className="py-4 px-6">
-                        <span>{convertCurrency(market.price_change_24h)}</span>
-                        <span className={`ml-1 ${handleColor(market.price_change_percentage_24h)}`}>
-                          {convertPercentage(market.price_change_percentage_24h)}
+                        <span>{convertCurrency(market.roi.times)}</span>
+                        <span className={`ml-1 ${handleColor(market.roi.percentage)}`}>
+                          {convertPercentage(market.roi.percentage)}
                         </span>
                       </td>
-                      <td className="py-4 px-6">{convertCurrency(market.high_24h)}</td>
-                      <td className="py-4 px-6">{convertCurrency(market.low_24h)}</td>
-                      <td className="py-4 px-6">{convertCurrency(market.market_cap)}</td>
-                      <td className="py-4 px-6">
-                        <span>{convertCurrency(market.market_cap_change_24h)}</span>
-                        <span className={`ml-1 ${handleColor(market.market_cap_change_percentage_24h)}`}>
-                          {convertPercentage(market.market_cap_change_percentage_24h)}
-                        </span>
-                      </td>
-                      <td className="py-4 px-6">{convertCurrency(market.total_volume)}</td>
-                      <td className="py-4 px-6">{convertCurrency(market.fully_diluted_valuation)}</td>
-                      <td className="py-4 px-6">{handleSupply(market.circulating_supply, market.symbol)}</td>
-                      <td className="py-4 px-6">{handleSupply(market.total_supply, market.symbol)}</td>
-                      <td className="py-4 px-6">{handleSupply(market.max_supply, market.symbol)}</td>
-                      <td className="py-4 px-6">
-                        <span>{convertCurrency(market.ath)}</span>
-                        <span className={`ml-1 ${handleColor(market.ath_change_percentage)}`}>
-                          {convertPercentage(market.ath_change_percentage)}
-                        </span>
-                      </td>
-                      <td className="py-4 px-6">{convertDate(market.ath_date)}</td>
-                      <td className="py-4 px-6">
-                        <span>{convertCurrency(market.atl)}</span>
-                        <span className={`ml-1 ${handleColor(market.atl_change_percentage)}`}>
-                          {convertPercentage(market.atl_change_percentage)}
-                        </span>
-                      </td>
-                      <td className="py-4 px-6">{convertDate(market.atl_date)}</td>
-                      {market.roi !== null ? (
-                        <td className="py-4 px-6">
-                          <span>{convertCurrency(market.roi.times)}</span>
-                          <span className={`ml-1 ${handleColor(market.roi.percentage)}`}>
-                            {convertPercentage(market.roi.percentage)}
-                          </span>
-                        </td>
-                      ) : (
-                        <td className="py-4 px-6"></td>
-                      )}
-                      <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
-                    </tr>
-                  )
-                })
+                    ) : (
+                      <td className="py-4 px-6"></td>
+                    )}
+                    <td className="py-4 px-6">{convertDate(market.last_updated)}</td>
+                  </tr>
+                ))
               )}
             </tbody>
           </table>
